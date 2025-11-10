@@ -1,4 +1,4 @@
-package com.example.calculadoraucelo.model;
+package com.example.calculadoraucelo.model.capacidade;
 
 public record CalculoCapacidadeResponse(
         Double capacidadeCalculada, // resultado (capacidade)

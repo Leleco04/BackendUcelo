@@ -1,7 +1,7 @@
-package com.example.calculadoraucelo.service;
+package com.example.calculadoraucelo.service.capacidade;
 
-import com.example.calculadoraucelo.model.CalculoCapacidadeRequest;
-import com.example.calculadoraucelo.model.CalculoCapacidadeResponse;
+import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeRequest;
+import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeResponse;
 import org.springframework.stereotype.Service;
 
 // Marca a classe como um service
