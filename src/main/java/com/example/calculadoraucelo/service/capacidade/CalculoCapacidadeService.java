@@ -1,7 +1,7 @@
 package com.example.calculadoraucelo.service.capacidade;
 
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeRequest;
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeResponse;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeRequestDTO;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeResponseDTO;
 import org.springframework.stereotype.Service;
 
 // Marca a classe como um service
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class CalculoCapacidadeService {
 
     // Método para calcular a capacidade
-    public CalculoCapacidadeResponse calcular(CalculoCapacidadeRequest request) {
+    public CapacidadeResponseDTO calcular(CapacidadeRequestDTO request) {
         // Pega os dados do request dto
         double velocidade = request.velocidade();
         double passo = request.passo();
@@ -25,7 +25,7 @@ public class CalculoCapacidadeService {
 
         double capacidade = velocidade * numCanecasPorMetro * densidadeProduto * 3.6 / 1000 * fatorEnchimento;
 
-        return new CalculoCapacidadeResponse(capacidade, "t/h");
+        return new CapacidadeResponseDTO(capacidade, "t/h");
     }
 
 }

@@ -1,9 +1,9 @@
 package com.example.calculadoraucelo.controller;
 
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeRequest;
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeResponse;
-import com.example.calculadoraucelo.model.velocidade.CalculoVelocidadeRequest;
-import com.example.calculadoraucelo.model.velocidade.CalculoVelocidadeResponse;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeRequestDTO;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeResponseDTO;
+import com.example.calculadoraucelo.dto.velocidade.VelocidadeRequestDTO;
+import com.example.calculadoraucelo.dto.velocidade.VelocidadeResponseDTO;
 import com.example.calculadoraucelo.service.capacidade.CalculoCapacidadeService;
 import com.example.calculadoraucelo.service.capacidade.RelatorioCapacidadeService;
 import com.example.calculadoraucelo.service.velocidade.CalculoVelocidadeService;
@@ -39,15 +39,15 @@ public class CalculosController {
 
     // Rota post para a api (/api/calculos/capacidade)
     @PostMapping("/capacidade")
-    public ResponseEntity<CalculoCapacidadeResponse> calcularCapacidade(@RequestBody CalculoCapacidadeRequest calculoCapacidadeRequest){
-        CalculoCapacidadeResponse response = calculoCapacidadeService.calcular(calculoCapacidadeRequest);
+    public ResponseEntity<CapacidadeResponseDTO> calcularCapacidade(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO){
+        CapacidadeResponseDTO response = calculoCapacidadeService.calcular(capacidadeRequestDTO);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/capacidade/relatorio")
-    public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody CalculoCapacidadeRequest calculoCapacidadeRequest) {
-        ByteArrayInputStream pdf = relatorioCapacidadeService.gerarRelatorio(calculoCapacidadeRequest);
+    public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO) {
+        ByteArrayInputStream pdf = relatorioCapacidadeService.gerarRelatorio(capacidadeRequestDTO);
 
         // 2. Prepara os Headers
         HttpHeaders headers = new HttpHeaders();
@@ -62,15 +62,15 @@ public class CalculosController {
     }
 
     @PostMapping("/velocidade")
-    public ResponseEntity<CalculoVelocidadeResponse> calcularVelocidade(@RequestBody CalculoVelocidadeRequest calculoVelocidadeRequest){
-        CalculoVelocidadeResponse response = calculoVelocidadeService.calcular(calculoVelocidadeRequest);
+    public ResponseEntity<VelocidadeResponseDTO> calcularVelocidade(@RequestBody VelocidadeRequestDTO velocidadeRequestDTO){
+        VelocidadeResponseDTO response = calculoVelocidadeService.calcular(velocidadeRequestDTO);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/velocidade/relatorio")
-    public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody CalculoVelocidadeRequest calculoVelocidadeRequest) {
-        ByteArrayInputStream pdf = relatorioVelocidadeService.gerarRelatorio(calculoVelocidadeRequest);
+    public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody VelocidadeRequestDTO velocidadeRequestDTO) {
+        ByteArrayInputStream pdf = relatorioVelocidadeService.gerarRelatorio(velocidadeRequestDTO);
 
         // 2. Prepara os Headers
         HttpHeaders headers = new HttpHeaders();

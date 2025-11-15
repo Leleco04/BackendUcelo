@@ -1,7 +1,7 @@
 package com.example.calculadoraucelo.service.capacidade;
 
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeRequest;
-import com.example.calculadoraucelo.model.capacidade.CalculoCapacidadeResponse;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeRequestDTO;
+import com.example.calculadoraucelo.dto.capacidade.CapacidadeResponseDTO;
 import com.example.calculadoraucelo.util.RelatorioPdfHelper;
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
@@ -24,9 +24,9 @@ public class RelatorioCapacidadeService {
     private RelatorioPdfHelper helper; // injetando o pdf helper
 
     // metodo para gerar o relatorio
-    public ByteArrayInputStream gerarRelatorio(CalculoCapacidadeRequest request) {
+    public ByteArrayInputStream gerarRelatorio(CapacidadeRequestDTO request) {
         // antes de tudo calcula o resultado
-        CalculoCapacidadeResponse response = calculoService.calcular(request);
+        CapacidadeResponseDTO response = calculoService.calcular(request);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // inicia um documento novo

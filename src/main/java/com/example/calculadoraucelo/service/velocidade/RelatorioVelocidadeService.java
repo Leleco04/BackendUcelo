@@ -1,7 +1,7 @@
 package com.example.calculadoraucelo.service.velocidade;
 
-import com.example.calculadoraucelo.model.velocidade.CalculoVelocidadeRequest;
-import com.example.calculadoraucelo.model.velocidade.CalculoVelocidadeResponse;
+import com.example.calculadoraucelo.dto.velocidade.VelocidadeRequestDTO;
+import com.example.calculadoraucelo.dto.velocidade.VelocidadeResponseDTO;
 import com.example.calculadoraucelo.util.RelatorioPdfHelper;
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
@@ -21,9 +21,9 @@ public class RelatorioVelocidadeService {
     @Autowired
     private RelatorioPdfHelper helper;
 
-    public ByteArrayInputStream gerarRelatorio(CalculoVelocidadeRequest request) {
+    public ByteArrayInputStream gerarRelatorio(VelocidadeRequestDTO request) {
         // antes de tudo calcula o resultado
-        CalculoVelocidadeResponse response = calculoService.calcular(request);
+        VelocidadeResponseDTO response = calculoService.calcular(request);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // inicia um documento novo
