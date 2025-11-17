@@ -21,9 +21,9 @@ public class RelatorioVelocidadeService {
     @Autowired
     private RelatorioPdfHelper helper;
 
-    public ByteArrayInputStream gerarRelatorio(VelocidadeRequestDTO request) {
+    public ByteArrayInputStream gerarRelatorio(VelocidadeRequestDTO request, String cnpjUsuario) {
         // antes de tudo calcula o resultado
-        VelocidadeResponseDTO response = calculoService.calcular(request);
+        VelocidadeResponseDTO response = calculoService.calcular(request, cnpjUsuario);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // inicia um documento novo
@@ -47,9 +47,14 @@ public class RelatorioVelocidadeService {
             helper.addTimestamp(document);
             helper.addEspaco(document);
 
+            // dados do solicitante
+            helper.addSubtitulo(document, "Dados do Solicitante:");
+            helper.addDado(document, "CNPJ", cnpjUsuario);
+            helper.addEspaco(document);
+
             // dados de entrada para o body
             helper.addSubtitulo(document, "Dados de Entrada:");
-            helper.addDado(document, "Ø do tambor", request.oDoTambor());
+            helper.addDado(document, "Diâmetro do tambor", request.diametroTambor());
             helper.addDado(document, "Rotação do tambor", request.rotacaoDoTambor());
 
             // adiciona espaçamento

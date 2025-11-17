@@ -7,9 +7,15 @@ spring:
     # usuario do Banco de Dados
     username: root
     # senha do banco
-    password: Senai@2025
+    password: 1111
+    # password: Senai@2025
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:secret}

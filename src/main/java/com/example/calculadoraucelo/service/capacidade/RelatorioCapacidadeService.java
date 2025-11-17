@@ -24,9 +24,9 @@ public class RelatorioCapacidadeService {
     private RelatorioPdfHelper helper; // injetando o pdf helper
 
     // metodo para gerar o relatorio
-    public ByteArrayInputStream gerarRelatorio(CapacidadeRequestDTO request) {
+    public ByteArrayInputStream gerarRelatorio(CapacidadeRequestDTO request, String cnpj) {
         // antes de tudo calcula o resultado
-        CapacidadeResponseDTO response = calculoService.calcular(request);
+        CapacidadeResponseDTO response = calculoService.calcular(request, cnpj);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         // inicia um documento novo
