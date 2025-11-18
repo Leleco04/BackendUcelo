@@ -3,6 +3,8 @@ package com.example.calculadoraucelo.model.capacidade;
 import com.example.calculadoraucelo.model.usuario.Usuario;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="historico_capacidade")
 public class Capacidade {
@@ -47,6 +49,8 @@ public class Capacidade {
 
     @Column(name = "unidade") //
     private String unidade;
+
+    private LocalDateTime dataCalculo;
 
     public void CalculoCapacidade() {
     }
@@ -153,5 +157,13 @@ public class Capacidade {
 
     public void setUnidade(String unidade) {
         this.unidade = unidade;
+    }
+
+    public LocalDateTime getDataCalculo() {
+        return dataCalculo;
+    }
+
+    public void setDataCalculo(LocalDateTime dataCalculo) {
+        this.dataCalculo = dataCalculo;
     }
 }

@@ -34,43 +34,57 @@ import java.io.ByteArrayInputStream;
 // Permite que a rota do angular acesse a API
 // @CrossOrigin(origins = "http://localhost:4200")
 public class CalculosController {
+
+    // INJeta o service de calculo de capacidade
     @Autowired
     private CalculoCapacidadeService calculoCapacidadeService;
 
+    // INJeta o repository de capacidade
     @Autowired
     private CapacidadeRepository capacidadeRepository;
 
+    // INJeta o repository de velocidade
     @Autowired
     private VelocidadeRepository velocidadeRepository;
 
+    // INJeta o service de relatorio de calculo de capacidade
     @Autowired
     private RelatorioCapacidadeService relatorioCapacidadeService;
 
+    // INJeta o service de relatorio de calculo de velocidade
     @Autowired
     private RelatorioVelocidadeService relatorioVelocidadeService;
 
+    // INJeta o service de calculo de velocidade
     @Autowired
     private CalculoVelocidadeService calculoVelocidadeService;
+
+    // injeta o service de usuario
     @Autowired
     private UsuarioService usuarioService;
 
     // Rota post para a api (/api/calculos/capacidade)
     @PostMapping("/capacidade")
     public ResponseEntity<CapacidadeResponseDTO> calcularCapacidade(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO){
+        // calcula o resultado e salva com o response dto
         CapacidadeResponseDTO response = calculoCapacidadeService.calcular(capacidadeRequestDTO, getCnpjUsuario());
 
+        // retorna o status OK (200) com a resposta
         return ResponseEntity.ok(response);
     }
 
+    // rota metodo post (qapi/calculos/capacidade/relatorio) para gerar relatorio de capacidade
     @PostMapping("/capacidade/relatorio")
     public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO) {
+        // cria o pdf (relatorio) com o service de relatorio de capacidade
         ByteArrayInputStream pdf = relatorioCapacidadeService.gerarRelatorio(capacidadeRequestDTO, getCnpjUsuario());
 
-        // 2. Prepara os Headers
+        // prepara os Headers do pdf
         HttpHeaders headers = new HttpHeaders();
+        // adiciona nome do arquivo
         headers.add("Content-Disposition", "inline; filename=relatorio-capacidade.pdf");
 
-        // 3. Retorna o arquivo PDF
+        // retorna o arquivo PDF com status OK (200)
         return ResponseEntity
                 .ok()
                 .headers(headers)
@@ -78,10 +92,13 @@ public class CalculosController {
                 .body(new InputStreamResource(pdf));
     }
 
+    // rota metodo post para calculo de velocidade (/api/calculos/velocidade)
     @PostMapping("/velocidade")
     public ResponseEntity<VelocidadeResponseDTO> calcularVelocidade(@RequestBody VelocidadeRequestDTO velocidadeRequestDTO){
+        // calcula o resultado e salva com o dto de resposta
         VelocidadeResponseDTO response = calculoVelocidadeService.calcular(velocidadeRequestDTO, getCnpjUsuario());
 
+        // retorna o dto com o status Ok (200)
         return ResponseEntity.ok(response);
     }
 

@@ -12,6 +12,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+// identifica a classe como service
+// usado para criar o token de acesso
 @Service
 public class TokenService {
 
@@ -19,7 +21,7 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    // Gera o token
+    // metodo para Gerar o token
     public String generateToken(Usuario user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);

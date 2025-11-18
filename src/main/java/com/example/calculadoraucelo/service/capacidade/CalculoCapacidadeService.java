@@ -9,13 +9,17 @@ import com.example.calculadoraucelo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 // Marca a classe como um service
 @Service
 public class CalculoCapacidadeService {
 
+    // injeta o repository de usuario
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // injeta o repository de capacidade
     @Autowired
     private CapacidadeRepository capacidadeRepository;
 
@@ -60,6 +64,7 @@ public class CalculoCapacidadeService {
         novoCalculo.setProfundidade(profundidade);
         novoCalculo.setCapacidadeCalculada(capacidade);
         novoCalculo.setUnidade(unidade);
+        novoCalculo.setDataCalculo(LocalDateTime.now());
 
         // faz a inserção do novo calculo no banco
         capacidadeRepository.save(novoCalculo);

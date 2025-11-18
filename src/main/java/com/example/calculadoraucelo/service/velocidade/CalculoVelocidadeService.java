@@ -9,6 +9,8 @@ import com.example.calculadoraucelo.repository.VelocidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class CalculoVelocidadeService {
 
@@ -39,6 +41,7 @@ public class CalculoVelocidadeService {
         velocidadeCalculada.setRotacaoDoTambor(rotacaoDoTambor);
         velocidadeCalculada.setVelocidadeCalculada(velocidade);
         velocidadeCalculada.setUnidade(unidade);
+        velocidadeCalculada.setDataCalculo(LocalDateTime.now());
 
         // salva o calculo no banco
         velocidadeRepository.save(velocidadeCalculada);

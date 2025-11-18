@@ -3,6 +3,8 @@ package com.example.calculadoraucelo.model.velocidade;
 import com.example.calculadoraucelo.model.usuario.Usuario;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="historico_velocidade")
 public class Velocidade {
@@ -22,6 +24,8 @@ public class Velocidade {
 
     private double velocidadeCalculada;
     private String unidade;
+
+    private LocalDateTime dataCalculo;
 
     public void Velocidade() {}
 
@@ -71,5 +75,13 @@ public class Velocidade {
 
     public void setUnidade(String unidade) {
         this.unidade = unidade;
+    }
+
+    public LocalDateTime getDataCalculo() {
+        return dataCalculo;
+    }
+
+    public void setDataCalculo(LocalDateTime dataCalculo) {
+        this.dataCalculo = dataCalculo;
     }
 }
