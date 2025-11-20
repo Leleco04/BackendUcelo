@@ -70,7 +70,7 @@ public class CalculoCapacidadeService {
         capacidadeRepository.save(novoCalculo);
 
         // retorna a resposta json com capacidade e unidade de medida
-        return new CapacidadeResponseDTO(capacidade, unidade);
+        return new CapacidadeResponseDTO(novoCalculo.getId() ,capacidade, unidade);
     }
 
 }

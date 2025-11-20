@@ -66,6 +66,9 @@ public class CalculosController {
     // Rota post para a api (/api/calculos/capacidade)
     @PostMapping("/capacidade")
     public ResponseEntity<CapacidadeResponseDTO> calcularCapacidade(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO){
+        // ADICIONE ISSO PARA TESTE
+        System.out.println(">>> REQUISIÇÃO RECEBIDA NO BACKEND: " + System.currentTimeMillis());
+
         // calcula o resultado e salva com o response dto
         CapacidadeResponseDTO response = calculoCapacidadeService.calcular(capacidadeRequestDTO, getCnpjUsuario());
 
@@ -74,15 +77,15 @@ public class CalculosController {
     }
 
     // rota metodo post (qapi/calculos/capacidade/relatorio) para gerar relatorio de capacidade
-    @PostMapping("/capacidade/relatorio")
-    public ResponseEntity<InputStreamResource> gerarRelatorio(@RequestBody CapacidadeRequestDTO capacidadeRequestDTO) {
+    @GetMapping("/capacidade/relatorio/{idCalculo}")
+    public ResponseEntity<InputStreamResource> gerarRelatorio(@PathVariable Long idCalculo) {
         // cria o pdf (relatorio) com o service de relatorio de capacidade
-        ByteArrayInputStream pdf = relatorioCapacidadeService.gerarRelatorio(capacidadeRequestDTO, getCnpjUsuario());
+        ByteArrayInputStream pdf = relatorioCapacidadeService.gerarRelatorio(idCalculo, getCnpjUsuario());
 
         // prepara os Headers do pdf
         HttpHeaders headers = new HttpHeaders();
         // adiciona nome do arquivo
-        headers.add("Content-Disposition", "inline; filename=relatorio-capacidade.pdf");
+        headers.add("Content-Disposition", "inline; filename=relatorio-capacidade_" + idCalculo + ".pdf");
 
         // retorna o arquivo PDF com status OK (200)
         return ResponseEntity
